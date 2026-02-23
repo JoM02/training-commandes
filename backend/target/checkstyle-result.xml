@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.45.1">
+<file name="D:\PROJETS INFORMATIQUES\training-site\backend\src\main\java\com\example\App.java">
+</file>
+<file name="D:\PROJETS INFORMATIQUES\training-site\backend\src\main\java\com\example\config\HibernateUtil.java">
+</file>
+<file name="D:\PROJETS INFORMATIQUES\training-site\backend\src\test\java\com\example\AppTest.java">
+</file>
+</checkstyle>
