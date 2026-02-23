@@ -22,6 +22,17 @@ Pour arrêter les conteneurs et supprimer les volumes associés :
 docker-compose down -v
 ```
 
+## Lancement du backend
+
+Pour lancer le backend :
+
+```sh
+cd backend
+mvn clean install
+cd target
+java -jar app.jar OU java -jar .\demo-1.0-SNAPSHOT.jar
+```
+
 ## Accès à la Base de Données (DB)
 
 Pour entrer dans le conteneur PostgreSQL et accéder à la base de données :
