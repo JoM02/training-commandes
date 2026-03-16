@@ -33,6 +33,16 @@ cd target
 java -jar app.jar OU java -jar .\demo-1.0-SNAPSHOT.jar
 ```
 
+## Lancement du frontend
+
+Pour lancer le frontend :
+
+```sh
+cd frontend
+npm install
+npm run dev
+```
+
 ## Accès à la Base de Données (DB)
 
 Pour entrer dans le conteneur PostgreSQL et accéder à la base de données :
