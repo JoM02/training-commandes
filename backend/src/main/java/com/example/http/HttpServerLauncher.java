@@ -1,6 +1,7 @@
 package com.example.http;
 
 import com.example.controller.HelloController;
+import com.example.http.handler.ClientHandler;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -32,6 +33,8 @@ public final class HttpServerLauncher {
 
             // Ajouter un contexte pour gérer les requêtes sur "/api/hello"
             server.createContext("/api/hello", new HelloController());
+
+            server.createContext("/clients", new ClientHandler());
 
             server.setExecutor(null);
             server.start();
