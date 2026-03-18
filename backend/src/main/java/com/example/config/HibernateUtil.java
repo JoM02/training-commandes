@@ -20,9 +20,16 @@ public final class HibernateUtil {
      */
     public static void init() {
         try {
-            sessionFactory = new Configuration()
-                    .configure("hibernate.cfg.xml")
-                    .buildSessionFactory();
+
+            // Crée une configuration Hibernate
+            Configuration configuration = new Configuration();
+            configuration.configure("hibernate.cfg.xml"); // Charge hibernate.cfg.xml
+
+            // Ajoute automatiquement toutes les entités dans le package com.example.model
+            // (ne fonctionne pas)
+            // configuration.addPackage("com.example.model");
+
+            sessionFactory = configuration.buildSessionFactory();
 
             System.out.println("Hibernate initialized successfully");
 
