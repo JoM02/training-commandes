@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.service.ClientService;
 import com.example.model.Client;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
@@ -10,13 +11,18 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService service = new ClientService();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void getAllClients(HttpExchange exchange) throws IOException {
         try {
             List<Client> clients = service.getAllClients();
-            String response = clients.toString(); // Remplacez par JSON si nécessaire
-            exchange.sendResponseHeaders(200, response.getBytes().length);
-            exchange.getResponseBody().write(response.getBytes());
+
+            // Utilisation d'object mapper pour map les données
+            String json = objectMapper.writeValueAsString(clients);
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+
+            exchange.sendResponseHeaders(200, json.getBytes().length);
+            exchange.getResponseBody().write(json.getBytes());
         } catch (Exception e) {
             exchange.sendResponseHeaders(500, -1);
             e.printStackTrace();

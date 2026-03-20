@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +22,7 @@ public class Client {
     private String email;
 
     // Relation future avec Order
+    // @JsonIgnore
     // @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     // private Set<Order> orders = new HashSet<>();
 
