@@ -5,7 +5,9 @@ import com.example.model.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class ClientController {
@@ -32,7 +34,34 @@ public class ClientController {
     }
 
     public void createClient(HttpExchange exchange) throws IOException {
-        // on verra plus tard (POST + body)
-        exchange.sendResponseHeaders(201, -1);
+
+        if (!"POST".equals(exchange.getRequestMethod())) {
+            exchange.sendResponseHeaders(405, -1);
+            return;
+        }
+
+        // Lire le body
+        StringBuilder bodyBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(exchange.getRequestBody()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                bodyBuilder.append(line);
+            }
+        }
+        String body = bodyBuilder.toString();
+
+        // Convertir JSON → objet
+        Client client = objectMapper.readValue(body, Client.class);
+
+        // Appel service
+        Client created = service.createClient(client);
+
+        String json = objectMapper.writeValueAsString(created);
+
+        exchange.getResponseHeaders().add("Content-Type", "application/json");
+        exchange.sendResponseHeaders(201, json.getBytes().length);
+        exchange.getResponseBody().write(json.getBytes());
+        exchange.close();
     }
 }
