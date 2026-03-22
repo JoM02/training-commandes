@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS client;
 -- TABLE CLIENT
 -- =========================
 CREATE TABLE client (
-    id BIGINT NOT NULL,
+    id BIGSERIAL NOT NULL,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL,
     CONSTRAINT pk_client PRIMARY KEY (id)
@@ -61,10 +61,10 @@ CREATE TABLE order_product (
 -- =========================
 -- TABLE CLIENT
 -- =========================
-INSERT INTO client (id, name, email) VALUES
-(1, 'Alice Martin', 'alice.martin@mail.com'),
-(2, 'Bob Dupont', 'bob.dupont@mail.com'),
-(3, 'Charlie Bernard', 'charlie.bernard@mail.com');
+INSERT INTO client (name, email) VALUES
+('Alice Martin', 'alice.martin@mail.com'),
+('Bob Dupont', 'bob.dupont@mail.com'),
+('Charlie Bernard', 'charlie.bernard@mail.com');
 
 -- =========================
 -- TABLE PRODUCT
